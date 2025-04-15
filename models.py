@@ -54,7 +54,7 @@ class BinaryCNN(nn.Module):
         - 0: Incorrect die.
         - 1: Correct die.
     """
-    def __init__(self, num_classes):
+    def __init__(self):
         # We inherit everything from the base constructor of nn.Module
         super(BinaryCNN, self).__init__()
 
