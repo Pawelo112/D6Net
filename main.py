@@ -8,7 +8,7 @@ import numpy as np
 from data import DiceDataset, DiceBinaryDataset, DiceDotsDataset, get_transforms
 from models import CNN, BinaryCNN
 from train_eval import train_model, evaluate_model
-from inference import  plot_multiple_confusion_matrices
+from inference import plot_multiple_confusion_matrices
 from visualization import *
 
 # Set device
