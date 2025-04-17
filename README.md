@@ -1,4 +1,4 @@
-# Dice Classification
+# 🎲Dice Classification
 ## 📚 Table of Contents
 <details>
   <summary><strong>Click to expand</strong></summary>
