@@ -40,7 +40,7 @@ This project implements three different approaches:
 
 Confusion matrices and error counts are generated for each approach to help in evaluating and comparing their performance.
 
-## 🏗️Project Structure
+## 📋Project Structure
 
 The repository is organized into several modules for modularity and maintainability:
 
