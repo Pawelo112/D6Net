@@ -1,4 +1,4 @@
-# 🎲Dice Classification
+# 🎲Dice Classification 
 ## 📚 Table of Contents
 <details>
   <summary><strong>Click to expand</strong></summary>
@@ -13,20 +13,22 @@
   - [Tools](#tools)
 - [How to Run](#how-to-run)
 - [Conclusion](#conclusion)
+- [License](#license)
 
 </details>
 
 
-## Overview
+## 🔍Overview
 
-This is my university project that implements a classic D6 cube dice classification system using deep neural networks. The goal is to classify 28×28 grayscale images of dice based on the number of dots visible on the upper face.  
-The dataset (`dice_ext.csv`) contains images of both correct dice (with dot counts from 1 to 6) and incorrect dice (labeled as 0).  
+This is my university project that implements a classic D6 cube dice classification system using deep neural networks.  
+The goal is to classify 28×28 grayscale images of dice based on the number of dots visible on the upper face.  
+The dataset (`dice_ext`) contains images of both correct dice (with dot counts from 1 to 6) and incorrect dice (labeled as 0).  
 
 The model is expected to:
 - **Identify incorrect dice:** If the die is incorrect, the system should report it as such.
 - **Count dots on correct dice:** If the die is correct, the system should accurately predict the number of dots.
 
-Performance is measured in terms of overall accuracy—which includes both detecting incorrect dice and accurately counting dots on correct dice.
+Performance is measured in terms of overall accuracy - which includes both detecting incorrect dice and accurately counting dots on correct dice.
 
 This project implements three different approaches:
 1. **Approach 1 (Single Model):** Uses one convolutional neural network to classify images into 7 classes (0 representing an incorrect die, and 1–6 representing the number of dots on a correct die).
@@ -38,7 +40,7 @@ This project implements three different approaches:
 
 Confusion matrices and error counts are generated for each approach to help in evaluating and comparing their performance.
 
-## Project Structure
+## 🏗️Project Structure
 
 The repository is organized into several modules for modularity and maintainability:
 
@@ -65,7 +67,7 @@ The repository is organized into several modules for modularity and maintainabil
   - `uncertain_inference()`: Applies uncertainty estimation by checking the maximum softmax probability against a threshold.  
   - Functions that compute confusion matrices and count errors for each approach, and a function (`plot_multiple_confusion_matrices()`) to display the confusion matrices side by side.
   
-- **`visualization.py`**
+- **`visualization.py`**  
   Includes visualization utilities for displaying predictions and training progress:
   - Functions to show sample predictions for each individual model.
   - A combined visualizer that compares predictions across all three approaches for the same test samples.
@@ -78,9 +80,9 @@ The repository is organized into several modules for modularity and maintainabil
   Lists the Python packages needed for the project.
 
   
-## Design Decisions & Implementation Details
+## 📝Design Decisions & Implementation Details
 
-### Data Preparation
+### 📊Data Preparation
 
 - **Dataset Classes:**  
   - `DiceDataset` loads all images from `dice_ext.csv` and assigns labels based on a two-column scheme: column 0 is a flag for correct/incorrect; column 1 is either the dot count (if correct) or an error type (if incorrect).  
@@ -90,7 +92,7 @@ The repository is organized into several modules for modularity and maintainabil
 - **Transformations:**  
   A single transformation using `ToTensor()` converts normalized NumPy arrays (values between 0 and 1) into PyTorch tensors.
 
-### Network Architectures
+### 🌐Network Architectures
 
 - **CNN (Approach 1 & Dot Counting):**  
   - **Feature Extraction:**  
@@ -101,7 +103,7 @@ The repository is organized into several modules for modularity and maintainabil
 - **BinaryCNN (Ensemble’s Binary Classifier):**  
   Follows a similar architecture to the CNN used in Approach 1, but its final fully connected layer produces only 2 outputs (representing incorrect (0) and correct (1) dice).
 
-### Training and Evaluation
+### 🏁Training and Evaluation
 
 - **Training Loop:**  
   The `train_model()` function sets the model to training mode. For each batch, it performs the forward pass, computes the cross-entropy loss, zeroes gradients, backpropagates errors, and updates model parameters. The function also keeps a cumulative loss and computes accuracy over the training data.
@@ -112,7 +114,7 @@ The repository is organized into several modules for modularity and maintainabil
 - **Early Stopping:**  
   Training is stopped early if the validation loss does not improve for a configurable number of epochs (patience).
 
-### Inference and Error Analysis
+### 🚨Inference and Error Analysis
 
 - **Ensemble Inference:**  
   In Approach 2, the binary model first determines if a die is correct. For dice predicted as correct, the dots model (dot counter) predicts the dot count. The output from the dots model is adjusted by adding 1 (since it was trained on labels 0–5) so that the final prediction is in the range 1–6.
@@ -123,7 +125,7 @@ The repository is organized into several modules for modularity and maintainabil
 - **Confusion Matrices:**  
   Confusion matrices are computed for each approach to compare true and predicted labels. Additionally, each confusion function counts the number of errors (mismatched predictions) so that the overall performance can be quantitatively compared.
 
-### Tools
+### 🧰Tools
 
 - **PyTorch / Torchvision:**  
   Used for building and training models.
@@ -134,7 +136,7 @@ The repository is organized into several modules for modularity and maintainabil
 - **Matplotlib & Seaborn:**  
   Used for plotting training curves, sample predictions, and confusion matrices.
 
-## How to Run
+## 👨‍🏫How to Run
 
 1. **Clone the Repository:**
 
@@ -165,7 +167,11 @@ This script will:
 + Display sample predictions on 10 random test images.
 + Plot confusion matrices (with error counts) for all three approaches.
 
-## Conclusion
-This project demonstrates multiple approaches for dice classification using convolutional neural networks, including a single model approach, an ensemble method, and an uncertainty-based approach.  
-The project is organized into separate Python modules for better maintainability and clarity, and results are thoroughly visualized with training curves, sample predictions, and confusion matrices.
+## 📌Conclusion
+This project demonstrates multiple approaches for dice classification using convolutional neural networks, including a single model approach, an ensemble method, and an uncertainty-based approach.    
+The project is organized into separate Python modules for better maintainability and clarity, and results are thoroughly visualized with training curves, sample predictions, and confusion matrices.  
 Feel free to explore and extend the project further!
+
+## 📖License
+Copyright © 2025 [Paweł Marcinkowski](https://github.com/Pawelo112).  
+This project is [MIT](https://github.com/Pawelo112/D6Net/blob/main/LICENSE) licensed.
